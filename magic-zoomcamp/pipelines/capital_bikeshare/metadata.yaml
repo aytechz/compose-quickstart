@@ -1,0 +1,124 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - bike_to_gcp_parquet
+  - load_api_data_bike_bar_chart_g1
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: load_api_data_bike
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: load_api_data_bike
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - load_gcs
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: bike_to_gcp_parquet
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - load_api_data_bike
+  uuid: bike_to_gcp_parquet
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - load_gcs_to_big_query
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: load_gcs
+  retry_config: null
+  status: updated
+  timeout: null
+  type: data_loader
+  upstream_blocks:
+  - bike_to_gcp_parquet
+  uuid: load_gcs
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    data_provider: bigquery
+    data_provider_database: turnkey-triumph-412303
+    data_provider_profile: default
+    data_provider_schema: capital_bikeshare_dataset
+    data_provider_table: capital_rental
+    dbt: {}
+    disable_query_preprocessing: false
+    export_write_policy: append
+    limit: 1000
+    use_raw_sql: false
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: load_gcs_to_big_query
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - load_gcs
+  uuid: load_gcs_to_big_query
+cache_block_output_in_memory: false
+callbacks: []
+concurrency_config: {}
+conditionals: []
+created_at: '2024-03-24 05:41:04.956611+00:00'
+data_integration: null
+description: API to GCS Pipeline
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: capital_bikeshare
+notification_config: {}
+remote_variables_dir: null
+retry_config: {}
+run_pipeline_in_one_process: false
+settings:
+  triggers: null
+spark_config: {}
+tags: []
+type: python
+uuid: capital_bikeshare
+variables:
+  year: 2022
+variables_dir: /home/src/mage_data/magic-zoomcamp
+widgets:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    chart_style: vertical
+    chart_type: bar chart
+    x: x
+    y: y
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: load_api_data_bike_bar chart_g1
+  retry_config: null
+  status: executed
+  timeout: null
+  type: chart
+  upstream_blocks:
+  - load_api_data_bike
+  uuid: load_api_data_bike_bar_chart_g1
